@@ -1,19 +1,19 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface Particle {
   id: number;
   x: number;
   y: number;
   size: number;
+  moveX: number;
+  moveY: number;
 }
 
 export const AnimatedBackground: React.FC = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const smoothMouseX = useSpring(mouseX, { damping: 50, stiffness: 300 });
-  const smoothMouseY = useSpring(mouseY, { damping: 50, stiffness: 300 });
+
+  const particleSpeed = 0.2;
 
   const generateParticles = useCallback(() => {
     const newParticles: Particle[] = [];
@@ -24,7 +24,9 @@ export const AnimatedBackground: React.FC = () => {
         id: i,
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
-        size: Math.random() * 3 + 1,
+        size: Math.random() * 4 + 2, 
+        moveX: Math.random() * particleSpeed - particleSpeed / 2, 
+        moveY: Math.random() * particleSpeed - particleSpeed / 2,
       });
     }
 
@@ -40,66 +42,50 @@ export const AnimatedBackground: React.FC = () => {
     };
   }, [generateParticles]);
 
-  const handleMouseMove = useCallback((event: React.MouseEvent) => {
-    mouseX.set(event.clientX);
-    mouseY.set(event.clientY);
-  }, [mouseX, mouseY]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setParticles((particles) =>
+        particles.map((particle) => {
+          let newX = particle.x + particle.moveX;
+          let newY = particle.y + particle.moveY;
+
+          if (newX < 0 || newX > window.innerWidth) {
+            newX = Math.random() * window.innerWidth;
+          }
+          if (newY < 0 || newY > window.innerHeight) {
+            newY = Math.random() * window.innerHeight;
+          }
+
+          return { ...particle, x: newX, y: newY };
+        })
+      );
+    }, 16);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div 
-      className="fixed inset-0 overflow-hidden pointer-events-none"
-      onMouseMove={handleMouseMove}
-    >
+    <div className="fixed inset-0 overflow-hidden pointer-events-none">
       {particles.map((particle) => {
         return (
           <motion.div
             key={particle.id}
-            className="absolute rounded-full dark:bg-white/15 bg-black/15"
-            initial={{ 
+            className="absolute rounded-full bg-black/15 dark:bg-white/15"
+            initial={{ x: particle.x, y: particle.y, opacity: 0 }}
+            animate={{
               x: particle.x,
               y: particle.y,
-              opacity: 0 
-            }}
-            animate={{ 
               opacity: 1,
-              x: particle.x + (Math.random() * 40 - 20),
-              y: particle.y + (Math.random() * 40 - 20),
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              damping: 20,
             }}
             style={{
               width: particle.size,
               height: particle.size,
-              x: particle.x,
-              y: particle.y,
             }}
-            whileHover={{ scale: 1.2 }}
-            drag
-            dragConstraints={{
-              top: -50,
-              left: -50,
-              right: 50,
-              bottom: 50,
-            }}
-            dragElastic={0.2}
-            dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
-          >
-            <motion.div
-              className="w-full h-full"
-              animate={{
-                x: smoothMouseX.get() 
-                  ? (smoothMouseX.get() - particle.x) * 0.02
-                  : 0,
-                y: smoothMouseY.get() 
-                  ? (smoothMouseY.get() - particle.y) * 0.02
-                  : 0,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 150,
-                damping: 15,
-                mass: 0.1,
-              }}
-            />
-          </motion.div>
+          />
         );
       })}
     </div>
