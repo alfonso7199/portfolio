@@ -31,7 +31,7 @@ function App() {
       {showIntro ? (
         <IntroAnimation onComplete={handleIntroComplete} />
       ) : (
-        <div className={`min-h-screen font-mono transition-colors duration-300 ${
+        <div className={`min-h-screen font-pp_neue_montrealthin transition-colors duration-300 ${
           isDark ? 'dark bg-[#121212] text-white' : 'bg-[#e8e8e8] text-gray-900'
         }`}>
           <AnimatedBackground />

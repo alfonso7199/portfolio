@@ -22,10 +22,10 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <span className="text-white text-5xl font-bold font-mono">
+          <span className="text-white text-5xl font-bold font-pp_neue_montrealthin">
             Alfonso Sánchez
           </span>
-          <span className="text-white/70 text-xl font-mono">
+          <span className="text-white/70 text-xl font-pp_neue_montrealthin">
             Portfolio
           </span>
         </motion.div>

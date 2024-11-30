@@ -3,15 +3,24 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Neue Montreal Mono';
-  src: url('https://db.onlinewebfonts.com/t/0952f4ae207c41ce8e2f8887a8229d83.woff2') format('woff2');
+  font-family: 'pp_neue_montrealthin';
+  src: url('/src/fonts/ppneuemontreal-thin-webfont.woff2') format('woff2'),
+         url('/src/fonts/ppneuemontreal-thin-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'pp_neue_montrealbold';
+  src: url('/src/fonts/ppneuemontreal-bold-webfont.woff2') format('woff2'),
+         url('/src/fonts/ppneuemontreal-bold-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @layer base {
   html {
-    font-family: 'Neue Montreal Mono', monospace;
+    font-family: 'pp_neue_montrealthin', normal;
   }
 }
 
