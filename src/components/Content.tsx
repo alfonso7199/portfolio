@@ -12,7 +12,7 @@ export const Content: React.FC<ContentProps> = ({ activeSection }) => {
       <div className="space-y-4 font-mono">
         <h1 className="text-4xl font-bold">Welcome</h1>
         <p className="text-lg text-gray-600 dark:text-gray-400">
-        Enthusiast of technology and development, learning every day a little bit more to become a better fullstack developer!
+          Enthusiast of technology and development, learning every day a little bit more to become a better fullstack developer!
         </p>
       </div>
     ),
@@ -29,7 +29,7 @@ export const Content: React.FC<ContentProps> = ({ activeSection }) => {
         <h2 className="text-3xl font-bold">About Me</h2>
         <p className="text-gray-600 dark:text-gray-400">
           Full stack developer enthusiast with studies in multi platform applications and a strong curiosity for technology.
-           I have knowledge in Java and always seek to learn about new technologies and programming languages.
+          I have knowledge in Java and always seek to learn about new technologies and programming languages.
         </p>
       </div>
     ),
@@ -59,7 +59,7 @@ export const Content: React.FC<ContentProps> = ({ activeSection }) => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
-        className="fixed left-8 top-24 max-w-xl"
+        className="fixed left-16 top-16 max-w-xl"
       >
         {content[activeSection]}
       </motion.div>

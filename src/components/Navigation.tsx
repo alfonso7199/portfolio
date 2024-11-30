@@ -17,7 +17,7 @@ const navItems: NavItem[] = [
 
 export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActiveSection }) => {
   return (
-    <div className="fixed bottom-8 right-8 flex flex-col items-end space-y-1 font-mono">
+    <div className="fixed bottom-16 right-16 flex flex-col items-end space-y-1 font-mono">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
