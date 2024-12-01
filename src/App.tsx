@@ -5,6 +5,7 @@ import { Content } from './components/Content';
 import { AnimatedBackground } from './components/AnimatedBackground';
 import { CornerDecorations } from './components/CornerDecorations';
 import { IntroAnimation } from './components/IntroAnimation';
+import { SocialLinks } from './components/SocialLinks';
 import { Section } from './types';
 
 function App() {
@@ -13,7 +14,6 @@ function App() {
   const [showIntro, setShowIntro] = useState(true);
 
   useEffect(() => {
-    // Set dark mode by default
     document.documentElement.classList.add('dark');
   }, []);
 
@@ -39,7 +39,9 @@ function App() {
           <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
           <Navigation activeSection={activeSection} setActiveSection={setActiveSection} />
           <Content activeSection={activeSection} />
+          <SocialLinks className="fixed bottom-8 left-16" />
         </div>
+        
       )}
     </>
   );
