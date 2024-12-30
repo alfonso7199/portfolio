@@ -12,7 +12,6 @@ const navItems: NavItem[] = [
   { id: 'projects', label: 'Projects' },
   { id: 'info', label: 'Info' },
   { id: 'contact', label: 'Contact' },
-  { id: 'faq', label: 'FAQ' },
 ];
 
 export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActiveSection }) => {
@@ -42,13 +41,15 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActive
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
             onClick={() => setActiveSection(id)}
-            className="group text-base text-gray-900 dark:text-white hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 ease-in-out w-24 text-right p-2 rounded-md"
+            className="group text-base text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition-colors duration-300 ease-in-out"
           >
             <motion.span
               layout
-              className="inline-block"
+              className={`inline-block ${
+                activeSection === id ? 'font-bold underline' : ''
+              }`}
             >
-              {activeSection === id ? '●' : label}
+              {label}
             </motion.span>
           </motion.button>
         ))}
@@ -56,3 +57,4 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActive
     </div>
   );
 };
+

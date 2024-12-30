@@ -12,24 +12,51 @@ export const Content: React.FC<ContentProps> = ({ activeSection }) => {
       <div className="space-y-4 font-pp_neue_montrealthin">
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Welcome</h1>
         <p className="text-xl text-gray-900 dark:text-white leading-relaxed">
-          Enthusiast of technology and development, learning every day a little bit more to become a better fullstack developer!
+          On a journey to becoming a skilled full-stack developer, combining technology expertise with a love for building meaningful digital experiences.
         </p>
       </div>
     ),
     projects: (
       <div className="space-y-6 font-pp_neue_montrealthin">
         <h2 className="text-4xl font-bold text-gray-900 dark:text-white">Featured Projects</h2>
-        <div className="space-y-4">
-          {/* Añadir mañana los proyectos aquí */}
+        <div className="space-y-8 mt-6">
+          <div>
+            <a
+              href="https://github.com/alfonso7199/42-Madrid-alfsanch"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-5xl font-semibold text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+            >
+              42 Madrid
+            </a>
+            <p className="text-lg text-gray-800 dark:text-gray-300 mt-2">
+              A collection of projects developed as part of the 42 Madrid curriculum, showcasing skills in C, algorithms, and system programming.
+            </p>
+          </div>
+          <div>
+            <a
+              href="https://github.com/alfonso7199/nfcPlay-"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-5xl font-semibold text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+            >
+              NFC Play!
+            </a>
+            <p className="text-lg text-gray-800 dark:text-gray-300 mt-2">
+              An application designed for outdoor games using NFC cards to create fun and interactive experiences.
+            </p>
+          </div>
         </div>
       </div>
     ),
+
+
     info: (
       <div className="space-y-4 font-pp_neue_montrealthin">
         <h2 className="text-4xl font-bold text-gray-900 dark:text-white">About Me</h2>
         <p className="text-xl text-gray-900 dark:text-white leading-relaxed">
-          Full stack developer enthusiast with studies in multi platform applications and a strong curiosity for technology.
-          I have knowledge in Java and always seek to learn about new technologies and programming languages.
+          Full-stack development enthusiast with a background in multi-platform application studies and a strong passion for technology.
+          Proficient in Java, C, and web development, I am always eager to explore new technologies and programming languages.
         </p>
       </div>
     ),
@@ -37,20 +64,12 @@ export const Content: React.FC<ContentProps> = ({ activeSection }) => {
       <div className="space-y-4 font-pp_neue_montrealthin">
         <h2 className="text-4xl font-bold text-gray-900 dark:text-white">Get in Touch</h2>
         <p className="text-xl text-gray-900 dark:text-white leading-relaxed">
-          Let's work together!
+          Let's work together! You can reach out to me on LinkedIn by clicking the icon below.
         </p>
       </div>
     ),
-    faq: (
-      <div className="space-y-6 font-pp_neue_montrealthin">
-        <h2 className="text-4xl font-bold text-gray-900 dark:text-white">FAQ</h2>
-        <div className="space-y-4">
-          {/* Añadir preguntas frecuentes aquí */}
-        </div>
-      </div>
-    ),
   };
-  
+
   return (
     <AnimatePresence mode="wait">
       <motion.div

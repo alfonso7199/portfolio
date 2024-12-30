@@ -69,7 +69,7 @@ export const AnimatedBackground: React.FC = () => {
         return (
           <motion.div
             key={particle.id}
-            className="absolute rounded-full bg-black/15 dark:bg-white/15"
+            className="absolute bg-black/15 dark:bg-white/15"
             initial={{ x: particle.x, y: particle.y, opacity: 0 }}
             animate={{
               x: particle.x,
@@ -84,6 +84,7 @@ export const AnimatedBackground: React.FC = () => {
             style={{
               width: particle.size,
               height: particle.size,
+              transform: 'rotate(45deg)', 
             }}
           />
         );
