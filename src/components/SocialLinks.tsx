@@ -8,7 +8,7 @@ interface SocialLinksProps {
 
 export const SocialLinks: React.FC<SocialLinksProps> = ({ className = '', showLabels = false }) => {
   return (
-    <div className={`flex gap-6 items-center ${className} fixed left-10 md:left-16 bottom-8`}>
+    <div className={`flex gap-6 items-center ${className} fixed left-9 md:left-16 bottom-8`}>
       {showLabels ? (
         <>
           <a
