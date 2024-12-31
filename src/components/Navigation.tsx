@@ -16,12 +16,12 @@ const navItems: NavItem[] = [
 
 export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActiveSection }) => {
   return (
-    <div className="fixed bottom-16 right-16 flex flex-col items-end font-pp_neue_montrealthin">
+    <div className="fixed bottom-12 md:bottom-16 right-12 md:right-16 flex flex-col items-end font-pp_neue_montrealthin">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="text-5xl font-bold text-gray-900 dark:text-white"
+        className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 dark:text-white"
       >
         Alfonso Sánchez
       </motion.div>
@@ -29,7 +29,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActive
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="text-xl mb-6 text-gray-900 dark:text-gray-300"
+        className="text-sm sm:text-base md:text-xl mb-2 md:mb-6 text-gray-900 dark:text-gray-300"
       >
         Full Stack Developer
       </motion.div>
@@ -41,7 +41,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActive
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
             onClick={() => setActiveSection(id)}
-            className="group text-base text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition-colors duration-300 ease-in-out"
+            className="group text-sm sm:text-base text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition-colors duration-300 ease-in-out py-1"
           >
             <motion.span
               layout
@@ -57,4 +57,3 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActive
     </div>
   );
 };
-
