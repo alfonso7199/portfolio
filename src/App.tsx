@@ -6,7 +6,6 @@ import { AnimatedBackground } from './components/AnimatedBackground';
 import { CornerDecorations } from './components/CornerDecorations';
 import { IntroAnimation } from './components/IntroAnimation';
 import { SocialLinks } from './components/SocialLinks';
-import { MobileMenu } from './components/MobileMenu';
 import { Section } from './types';
 
 function App() {
@@ -43,12 +42,6 @@ function App() {
           <Navigation activeSection={activeSection} setActiveSection={setActiveSection} />
           <Content activeSection={activeSection} />
           <SocialLinks className="fixed bottom-8 left-16" />
-          {/* <MobileMenu
-            isOpen={isMobileMenuOpen}
-            setIsOpen={setIsMobileMenuOpen}
-            activeSection={activeSection}
-            setActiveSection={setActiveSection}
-          /> */}
         </div>
         
       )}

@@ -8,7 +8,7 @@ interface SocialLinksProps {
 
 export const SocialLinks: React.FC<SocialLinksProps> = ({ className = '', showLabels = false }) => {
   return (
-    <div className={`flex gap-6 items-center ${className} fixed left-4 md:left-16 bottom-8`}>
+    <div className={`flex gap-6 items-center ${className} fixed left-10 md:left-16 bottom-8`}>
       {showLabels ? (
         <>
           <a
@@ -38,7 +38,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({ className = '', showLa
             rel="noopener noreferrer"
             className="text-current hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
           >
-            <FaLinkedin size={28} className="md:w-8 md:h-8 w-6 h-6" />
+            <FaLinkedin size={28} className="md:w-8 md:h-8 w-7 h-7" />
           </a>
           <a
             href="https://github.com/alfonso7199"
@@ -46,7 +46,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({ className = '', showLa
             rel="noopener noreferrer"
             className="text-current hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
           >
-            <FaGithub size={28} className="md:w-8 md:h-8 w-6 h-6" />
+            <FaGithub size={28} className="md:w-8 md:h-8 w-7 h-7" />
           </a>
         </>
       )}
