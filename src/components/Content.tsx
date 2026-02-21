@@ -19,7 +19,7 @@ export const Content: React.FC<ContentProps> = ({ activeSection }) => {
     projects: (
       <div className="space-y-4 md:space-y-6 font-pp_neue_montrealthin">
         <h2 className="text-xl md:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">Featured Projects</h2>
-        <div className="space-y-3 md:space-y-4 lg:space-y-5 mt-4 md:mt-6 max-h-[50vh] lg:max-h-[60vh] overflow-y-auto pr-2">
+        <div className="space-y-3 md:space-y-4 lg:space-y-5 mt-4 md:mt-6 max-h-[50vh] lg:max-h-[60vh] overflow-y-auto pr-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           <div>
             <a
               href="https://play.google.com/store/apps/details?id=com.alfonso1799.CreatineCalendar"
@@ -154,7 +154,7 @@ export const Content: React.FC<ContentProps> = ({ activeSection }) => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.25, ease: "easeInOut" }}
-        className="fixed left-8 md:left-16 top-20 md:top-16 max-w-[calc(100%-4rem)] md:max-w-xl max-h-[calc(100vh-12rem)] px-4 md:px-0 overflow-y-auto"
+        className="fixed left-8 md:left-16 top-20 md:top-16 max-w-[calc(100%-4rem)] md:max-w-xl max-h-[calc(100vh-12rem)] px-4 md:px-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
       >
         {content[activeSection]}
       </motion.div>
