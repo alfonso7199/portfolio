@@ -90,9 +90,8 @@ export const AnimatedBackground: React.FC = () => {
       }
 
       draw(ctx: CanvasRenderingContext2D, isDark: boolean) {
-        const gridSize = 4;
-        const drawX = Math.round(this.x / gridSize) * gridSize;
-        const drawY = Math.round(this.y / gridSize) * gridSize;
+        const drawX = this.x;
+        const drawY = this.y;
 
         const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
         let intensity = speed / 1.2;
