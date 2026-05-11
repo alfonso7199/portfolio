@@ -5,7 +5,7 @@
 @font-face {
   font-family: 'pp_neue_montrealthin';
   src: url('/fonts/ppneuemontreal-thin-webfont.woff2') format('woff2'),
-         url('/fonts/ppneuemontreal-thin-webfont.woff') format('woff');
+       url('/fonts/ppneuemontreal-thin-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -13,17 +13,25 @@
 @font-face {
   font-family: 'pp_neue_montrealbold';
   src: url('/fonts/ppneuemontreal-bold-webfont.woff2') format('woff2'),
-         url('/fonts/ppneuemontreal-bold-webfont.woff') format('woff');
+       url('/fonts/ppneuemontreal-bold-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @layer base {
   html {
-    font-family: 'pp_neue_montrealthin', normal;
+    font-family: 'pp_neue_montrealthin', sans-serif;
   }
 }
 
 body {
   @apply antialiased;
+}
+
+:root        { --bg-main: #e4e4e4; }
+.dark        { --bg-main: #121212; }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.2; transform: translateY(0); }
+  50%       { opacity: 1;   transform: translateY(2px); }
 }

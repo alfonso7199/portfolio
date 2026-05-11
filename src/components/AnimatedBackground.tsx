@@ -171,7 +171,7 @@ export const AnimatedBackground: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none transition-opacity duration-300"
+      className="fixed inset-0 pointer-events-none transition-opacity duration-300 opacity-[0.45] dark:opacity-100"
     />
   );
 };
