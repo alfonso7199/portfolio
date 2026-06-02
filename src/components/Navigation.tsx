@@ -19,7 +19,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActive
     <div className="fixed bottom-12 md:bottom-16 right-14 md:right-16 flex flex-col items-end font-pp_neue_montrealthin">
 
       <AnimatePresence mode="wait">
-        {activeSection !== 'projects' && (
+        {activeSection !== 'projects' && activeSection !== 'info' && (
           <motion.div
             key="name"
             initial={{ opacity: 0, y: 16 }}
@@ -34,7 +34,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActive
       </AnimatePresence>
 
       <AnimatePresence mode="wait">
-        {activeSection !== 'projects' && (
+        {activeSection !== 'projects' && activeSection !== 'info' && (
           <motion.div
             key="title"
             initial={{ opacity: 0, y: 16 }}
