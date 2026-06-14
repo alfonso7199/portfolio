@@ -5,7 +5,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['Neue Montreal Mono', 'monospace'],
+        mono:                   ['Neue Montreal Mono', 'monospace'],
+        pp_neue_montrealthin:   ['pp_neue_montrealthin',   'sans-serif'],
+        pp_neue_montrealbook:   ['pp_neue_montrealbook',   'sans-serif'],
+        pp_neue_montrealmedium: ['pp_neue_montrealmedium', 'sans-serif'],
+        pp_neue_montrealbold:   ['pp_neue_montrealbold',   'sans-serif'],
       },
       colors: {
         dark: {

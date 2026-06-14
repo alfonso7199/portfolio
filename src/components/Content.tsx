@@ -120,12 +120,12 @@ const ProjectList: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: index * 0.05, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <div className="h-px bg-gray-300 dark:bg-gray-800 mb-4" />
+            <div className="h-px bg-gray-400 dark:bg-gray-700 mb-4" />
 
             <div className="pb-4 group">
               {/* Index + name + arrow */}
               <div className="flex items-baseline gap-3">
-                <span className="text-[11px] text-gray-500 dark:text-gray-600 tabular-nums shrink-0 select-none">
+                <span className="text-[11px] text-gray-600 dark:text-gray-400 tabular-nums shrink-0 select-none">
                   {String(index + 1).padStart(2, '0')}
                 </span>
 
@@ -133,16 +133,16 @@ const ProjectList: React.FC = () => {
                   href={project.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 text-xl md:text-2xl lg:text-3xl font-bold
+                  className="flex-1 text-xl md:text-2xl lg:text-3xl font-pp_neue_montrealbold
                              text-gray-900 dark:text-white
-                             hover:text-gray-500 dark:hover:text-gray-400
+                             hover:text-gray-600 dark:hover:text-gray-300
                              transition-colors duration-150 leading-snug"
                 >
                   {project.name}
                 </a>
 
                 <span
-                  className="text-gray-500 dark:text-gray-600 text-base
+                  className="text-gray-600 dark:text-gray-300 text-base
                              opacity-0 group-hover:opacity-100 transition-opacity duration-150 shrink-0"
                 >
                   ↗
@@ -154,28 +154,28 @@ const ProjectList: React.FC = () => {
                   {project.tags.map((tag, i) => (
                     <React.Fragment key={tag}>
                       {i > 0 && (
-                        <span className="text-gray-400 dark:text-gray-700 text-xs select-none">·</span>
+                        <span className="text-gray-500 dark:text-gray-500 text-xs select-none">·</span>
                       )}
-                      <span className="text-[11px] uppercase tracking-widest text-gray-600 dark:text-gray-500">
+                      <span className="text-[11px] uppercase tracking-widest text-gray-700 dark:text-gray-300">
                         {tag}
                       </span>
                     </React.Fragment>
                   ))}
                 </div>
-                <span className="text-[11px] text-gray-500 dark:text-gray-600 tabular-nums ml-4 shrink-0">
+                <span className="text-[11px] text-gray-600 dark:text-gray-400 tabular-nums ml-4 shrink-0">
                   {project.year}
                 </span>
               </div>
 
-              <p className="text-sm md:text-base text-gray-700 dark:text-gray-300
-                            leading-relaxed mt-2 ml-[26px]">
+              <p className="text-sm md:text-base text-gray-800 dark:text-gray-100
+                            font-pp_neue_montrealmedium leading-relaxed mt-2 ml-[26px]">
                 {project.description}
               </p>
             </div>
           </motion.div>
         ))}
 
-        <div className="h-px bg-gray-300 dark:bg-gray-800" />
+        <div className="h-px bg-gray-400 dark:bg-gray-700" />
         <div className="h-6" />
       </div>
 
@@ -189,7 +189,7 @@ const ProjectList: React.FC = () => {
           {[0, 0.15, 0.3].map((delay, i) => (
             <span
               key={i}
-              className="block w-1 h-1 rounded-full bg-gray-500 dark:bg-gray-600"
+              className="block w-1 h-1 rounded-full bg-gray-600 dark:bg-gray-500"
               style={{ animation: `pulse-dot 1.2s ease-in-out ${delay}s infinite` }}
             />
           ))}
@@ -206,17 +206,18 @@ export const Content: React.FC<ContentProps> = ({ activeSection }) => {
     home: (
       <div className="space-y-5">
         <div>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
+          <h1 className="text-4xl md:text-5xl font-pp_neue_montrealbold text-gray-900 dark:text-white leading-tight">
             Welcome.
           </h1>
         </div>
-        <p className="text-base md:text-lg text-gray-800 dark:text-gray-200 leading-relaxed max-w-sm">
+        <p className="text-base md:text-lg text-gray-900 dark:text-gray-100
+                      font-pp_neue_montrealmedium leading-relaxed max-w-sm">
           On a journey to becoming a skilled full-stack developer — combining
           systems-level knowledge with modern mobile and web development.
         </p>
         <div className="flex flex-wrap gap-x-4 gap-y-1 pt-1">
           {['Java', 'Swift', 'C', 'React', 'TypeScript'].map(t => (
-            <span key={t} className="text-[11px] uppercase tracking-widest text-gray-500 dark:text-gray-600">
+            <span key={t} className="text-[11px] uppercase tracking-widest text-gray-700 dark:text-gray-300">
               {t}
             </span>
           ))}
@@ -227,10 +228,10 @@ export const Content: React.FC<ContentProps> = ({ activeSection }) => {
     projects: (
       <div className="space-y-4">
         <div className="flex items-baseline gap-3">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+          <h2 className="text-3xl md:text-4xl font-pp_neue_montrealbold text-gray-900 dark:text-white">
             Projects
           </h2>
-          <span className="text-xs text-gray-500 dark:text-gray-600 tabular-nums tracking-wider">
+          <span className="text-xs text-gray-600 dark:text-gray-400 tabular-nums tracking-wider">
             {String(projects.length).padStart(2, '0')}
           </span>
         </div>
@@ -241,15 +242,16 @@ export const Content: React.FC<ContentProps> = ({ activeSection }) => {
     info: (
       <div className="space-y-6">
         <div>
-          <p className="text-xs uppercase tracking-[0.18em] text-gray-600 dark:text-gray-500 mb-3">
+          <p className="text-xs uppercase tracking-[0.18em] text-gray-700 dark:text-gray-300 mb-3">
             About
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
+          <h2 className="text-4xl md:text-5xl font-pp_neue_montrealbold text-gray-900 dark:text-white leading-tight">
             Alfonso<br />Sánchez
           </h2>
         </div>
 
-        <p className="text-base md:text-lg text-gray-800 dark:text-gray-200 leading-relaxed max-w-sm">
+        <p className="text-base md:text-lg text-gray-900 dark:text-gray-100
+                      font-pp_neue_montrealmedium leading-relaxed max-w-sm">
           Full-stack developer with a background in multi-platform application
           development and a diploma from 42 Madrid. I enjoy working across the
           whole stack — from low-level C to Android apps and web interfaces.
@@ -263,18 +265,18 @@ export const Content: React.FC<ContentProps> = ({ activeSection }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25, delay: i * 0.07 }}
             >
-              <div className="h-px bg-gray-300 dark:bg-gray-800" />
+              <div className="h-px bg-gray-400 dark:bg-gray-700" />
               <div className="flex items-baseline justify-between py-2.5 gap-4">
-                <span className="text-[11px] uppercase tracking-widest text-gray-600 dark:text-gray-600 shrink-0">
+                <span className="text-[11px] uppercase tracking-widest text-gray-700 dark:text-gray-300 shrink-0">
                   {group.category}
                 </span>
-                <span className="text-sm text-gray-800 dark:text-gray-300 text-right leading-relaxed">
+                <span className="text-sm text-gray-900 dark:text-gray-100 text-right leading-relaxed">
                   {group.items.join(' · ')}
                 </span>
               </div>
             </motion.div>
           ))}
-          <div className="h-px bg-gray-300 dark:bg-gray-800" />
+          <div className="h-px bg-gray-400 dark:bg-gray-700" />
         </div>
       </div>
     ),
@@ -282,19 +284,20 @@ export const Content: React.FC<ContentProps> = ({ activeSection }) => {
     contact: (
       <div className="space-y-5">
         <div>
-          <p className="text-xs uppercase tracking-[0.18em] text-gray-600 dark:text-gray-500 mb-3">
+          <p className="text-xs uppercase tracking-[0.18em] text-gray-700 dark:text-gray-300 mb-3">
             Contact
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
+          <h2 className="text-4xl md:text-5xl font-pp_neue_montrealbold text-gray-900 dark:text-white leading-tight">
             Let's<br />work together.
           </h2>
         </div>
-        <p className="text-base md:text-lg text-gray-800 dark:text-gray-200 leading-relaxed max-w-sm">
+        <p className="text-base md:text-lg text-gray-900 dark:text-gray-100
+                      font-pp_neue_montrealmedium leading-relaxed max-w-sm">
           Open to opportunities, collaborations, and interesting conversations.
           Find me on LinkedIn or explore my code on GitHub.
         </p>
         <div className="space-y-1 pt-1">
-          <p className="text-sm text-gray-600 dark:text-gray-500 uppercase tracking-widest">
+          <p className="text-sm text-gray-800 dark:text-gray-300 uppercase tracking-widest">
             Madrid, Spain
           </p>
         </div>

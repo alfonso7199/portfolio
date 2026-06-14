@@ -16,7 +16,7 @@ const navItems: NavItem[] = [
 
 export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActiveSection }) => {
   return (
-    <div className="fixed bottom-12 md:bottom-16 right-14 md:right-16 flex flex-col items-end font-pp_neue_montrealthin">
+    <div className="fixed bottom-12 md:bottom-16 right-14 md:right-16 flex flex-col items-end font-pp_neue_montrealbook">
 
       <AnimatePresence mode="wait">
         {activeSection !== 'projects' && activeSection !== 'info' && (
@@ -26,7 +26,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActive
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.22, ease: 'easeInOut' }}
-            className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-none"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-pp_neue_montrealbold text-gray-900 dark:text-white leading-none"
           >
             Alfonso Sánchez
           </motion.div>
@@ -42,7 +42,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActive
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.22, delay: 0.04, ease: 'easeInOut' }}
             className="text-xs sm:text-sm md:text-base mt-1 mb-3 md:mb-5
-                       text-gray-600 dark:text-gray-400"
+                       text-gray-700 dark:text-gray-300"
           >
             Full Stack Developer
           </motion.div>
@@ -72,7 +72,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActive
                 className={`text-sm md:text-base transition-colors duration-150 ${
                   isActive
                     ? 'text-gray-900 dark:text-white font-bold'
-                    : 'text-gray-600 dark:text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-200'
+                    : 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white'
                 }`}
               >
                 {label}

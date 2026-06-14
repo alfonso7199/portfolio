@@ -1,5 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 
+const CHARS    = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン01◆▲■★☆';
+const COL_W    = 18;        // px per column
+const FONT_PX  = 14;        // font size
+const FPS      = 20;        // target frame-rate
+const INTERVAL = 1000 / FPS;
+const MOUSE_R  = 140;       // px — chars inside this radius light up
+
 export const AnimatedBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -9,169 +16,135 @@ export const AnimatedBackground: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animationFrameId: number;
-    let time = 0;
+    let W = 0, H = 0, cols = 0;
+    let drops: number[] = [];
+    let mouseX = -9999;
+    let mouseY = -9999;
+    let animId: number;
+    let lastTime = 0;
 
-    const noise = (x: number, y: number, t: number) => {
-      const nx = x * 0.0008;
-      const ny = y * 0.0008;
-      const v1 = Math.sin(nx * 2.5 + t);
-      const v2 = Math.cos(ny * 2.0 - t * 0.8);
-      const v3 = Math.sin((nx + ny) * 1.5 + t * 1.2);
-      return (v1 + v2 + v3) / 3;
-    };
-
-    class Particle {
-      id: number;
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      speed: number;
-      size: number;
-      highlightColor: number[];
-
-      constructor(w: number, h: number, id: number) {
-        this.id = id;
-        this.x = Math.random() * w;
-        this.y = Math.random() * h;
-        this.vx = 0;
-        this.vy = 0;
-        this.speed = Math.random() * 0.4 + 0.2;
-
-        const rand = Math.random();
-        this.size = rand > 0.9 ? 4 : rand > 0.4 ? 3 : 2;
-
-        this.highlightColor = [45, 212, 191];
-      }
-
-      update(w: number, h: number, t: number, mouseX: number, mouseY: number) {
-        const n = noise(this.x, this.y, t);
-        const angle = n * Math.PI * 4;
-
-        let tvx = Math.cos(angle) * this.speed;
-        let tvy = Math.sin(angle) * this.speed;
-
-        const regionalThickness = (Math.sin(this.x * 0.002 + t * 1.5) + Math.cos(this.y * 0.002 - t)) * 3.5;
-
-        const perpOffset = Math.sin(this.id * 137.54) * regionalThickness;
-
-        tvx += Math.cos(angle + Math.PI / 2) * perpOffset;
-        tvy += Math.sin(angle + Math.PI / 2) * perpOffset;
-
-        let dx = this.x - mouseX;
-        let dy = this.y - mouseY;
-        let dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < 200) {
-          const force = (200 - dist) / 200;
-          this.vx += (dx / dist) * force * 2.0;
-          this.vy += (dy / dist) * force * 2.0;
-        }
-
-        this.vx += (tvx - this.vx) * 0.03;
-        this.vy += (tvy - this.vy) * 0.03;
-
-        const currentSpeed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-        const maxAllowed = 1.0 + Math.abs(perpOffset) * 0.4;
-        if (currentSpeed > maxAllowed) {
-          this.vx = (this.vx / currentSpeed) * maxAllowed;
-          this.vy = (this.vy / currentSpeed) * maxAllowed;
-        }
-
-        this.x += this.vx;
-        this.y += this.vy;
-
-        const margin = 50;
-        if (this.x < -margin) this.x = w + margin;
-        if (this.x > w + margin) this.x = -margin;
-        if (this.y < -margin) this.y = h + margin;
-        if (this.y > h + margin) this.y = -margin;
-      }
-
-      draw(ctx: CanvasRenderingContext2D, isDark: boolean) {
-        const drawX = this.x;
-        const drawY = this.y;
-
-        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-        let intensity = speed / 1.2;
-        intensity = Math.max(0, Math.min(1, Math.pow(intensity, 1.5)));
-
-        const baseColor = isDark ? [55, 55, 55] : [130, 130, 130];
-        const activeHighlightColor = isDark ? this.highlightColor : [25, 170, 150];
-
-        const r = Math.floor(baseColor[0] * (1 - intensity) + activeHighlightColor[0] * intensity);
-        const g = Math.floor(baseColor[1] * (1 - intensity) + activeHighlightColor[1] * intensity);
-        const b = Math.floor(baseColor[2] * (1 - intensity) + activeHighlightColor[2] * intensity);
-
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.85)`;
-        ctx.fillRect(drawX, drawY, this.size, this.size);
-      }
-    }
-
-    let particles: Particle[] = [];
-    let mouseX = -1000;
-    let mouseY = -1000;
-
+    /* ── initialise / resize ── */
     const init = () => {
-      particles = [];
-      const numParticles = Math.floor((window.innerWidth * window.innerHeight) / 800);
-      for (let i = 0; i < numParticles; i++) {
-        particles.push(new Particle(canvas.width, canvas.height, i));
-      }
+      W     = canvas.width  = window.innerWidth;
+      H     = canvas.height = window.innerHeight;
+      cols  = Math.floor(W / COL_W);
+      drops = Array.from({ length: cols }, () =>
+        Math.floor(Math.random() * -(H / COL_W))
+      );
     };
 
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      init();
-    };
+    /* ── draw (throttled to FPS) ── */
+    const draw = (time: number) => {
+      animId = requestAnimationFrame(draw);
+      if (time - lastTime < INTERVAL) return;
+      lastTime = time;
 
-    window.addEventListener('resize', resize);
-    resize();
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    };
-
-    const handleMouseOut = () => {
-      mouseX = -1000;
-      mouseY = -1000;
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseout', handleMouseOut);
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
       const isDark = document.documentElement.classList.contains('dark');
 
-      time += 0.0008;
+      /* semi-transparent background fill → creates trailing fade */
+      ctx.fillStyle = isDark
+        ? 'rgba(18, 18, 18, 0.055)'
+        : 'rgba(228, 228, 228, 0.11)';
+      ctx.fillRect(0, 0, W, H);
 
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        p.update(canvas.width, canvas.height, time, mouseX, mouseY);
-        p.draw(ctx, isDark);
+      ctx.font = `${FONT_PX}px "Courier New", monospace`;
+
+      for (let i = 0; i < cols; i++) {
+        const x = i * COL_W + 2;
+        const y = drops[i] * COL_W;
+
+        const char = CHARS[Math.floor(Math.random() * CHARS.length)];
+
+        /* mouse proximity: 0 = far, 1 = dead-centre */
+        const dx   = x - mouseX;
+        const dy   = y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const prox = Math.max(0, 1 - dist / MOUSE_R);
+
+        const baseAlpha = Math.random() * 0.45 + 0.1;
+
+        if (prox > 0.02) {
+          /* near cursor — interpolate to bright green */
+          const g     = Math.floor(120 + prox * 135);        // 120 – 255
+          const alpha = Math.min(1, baseAlpha + prox * 0.65);
+          ctx.fillStyle = `rgba(40, ${g}, 60, ${alpha})`;
+          ctx.fillText(char, x, y);
+
+          /* extra glow layer for the closest chars */
+          if (prox > 0.45) {
+            ctx.fillStyle = `rgba(130, 255, 140, ${prox * 0.55})`;
+            ctx.fillText(char, x, y);
+          }
+        } else if (isDark) {
+          /* dark mode baseline — deep matrix green */
+          ctx.fillStyle = `rgba(20, 82, 28, ${baseAlpha})`;
+          ctx.fillText(char, x, y);
+
+          /* occasional spontaneous bright flash (~2 % of chars) */
+          if (Math.random() < 0.022) {
+            ctx.fillStyle = `rgba(111, 255, 111, ${baseAlpha * 1.4})`;
+            ctx.fillText(char, x, y);
+          }
+        } else {
+          /* light mode — subdued green, lower alpha so text stays readable */
+          ctx.fillStyle = `rgba(15, 100, 35, ${baseAlpha * 0.40})`;
+          ctx.fillText(char, x, y);
+
+          if (Math.random() < 0.012) {
+            ctx.fillStyle = `rgba(0, 130, 50, ${baseAlpha * 0.55})`;
+            ctx.fillText(char, x, y);
+          }
+        }
+
+        /* advance drop; reset randomly after reaching bottom */
+        drops[i]++;
+        if (y > H && Math.random() > 0.975) {
+          drops[i] = Math.floor(Math.random() * -12);
+        }
       }
-
-      animationFrameId = requestAnimationFrame(animate);
     };
 
-    animate();
+    /* ── event listeners ── */
+    const onResize    = () => init();
+    const onMouseMove = (e: MouseEvent) => { mouseX = e.clientX; mouseY = e.clientY; };
+    const onMouseOut  = () => { mouseX = -9999; mouseY = -9999; };
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) { mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; }
+    };
+    const onTouchEnd = () => { mouseX = -9999; mouseY = -9999; };
+
+    /* ── theme-switch observer: hard-clear canvas on class change ── */
+    const observer = new MutationObserver(() => {
+      const nowDark = document.documentElement.classList.contains('dark');
+      ctx.fillStyle = nowDark ? '#121212' : '#e4e4e4';
+      ctx.fillRect(0, 0, W, H);
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+    init();
+    animId = requestAnimationFrame(draw);
+
+    window.addEventListener('resize',    onResize);
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseout',  onMouseOut);
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+    window.addEventListener('touchend',  onTouchEnd);
 
     return () => {
-      window.removeEventListener('resize', resize);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseout', handleMouseOut);
-      cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize',    onResize);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseout',  onMouseOut);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend',  onTouchEnd);
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none transition-opacity duration-300 opacity-[0.45] dark:opacity-100"
+      className="fixed inset-0 pointer-events-none"
     />
   );
 };

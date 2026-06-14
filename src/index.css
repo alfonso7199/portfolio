@@ -11,6 +11,22 @@
 }
 
 @font-face {
+  font-family: 'pp_neue_montrealbook';
+  src: url('/fonts/ppneuemontreal-book-webfont.woff2') format('woff2'),
+       url('/fonts/ppneuemontreal-book-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'pp_neue_montrealmedium';
+  src: url('/fonts/ppneuemontreal-medium-webfont.woff2') format('woff2'),
+       url('/fonts/ppneuemontreal-medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'pp_neue_montrealbold';
   src: url('/fonts/ppneuemontreal-bold-webfont.woff2') format('woff2'),
        url('/fonts/ppneuemontreal-bold-webfont.woff') format('woff');
