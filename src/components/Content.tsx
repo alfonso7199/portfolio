@@ -8,22 +8,42 @@ interface ContentProps {
 
 const projects = [
   {
-    name: 'Creatine Tracker',
-    href: 'https://play.google.com/store/apps/details?id=com.alfonso1799.CreatineCalendar',
-    description: 'Mobile app for tracking creatine supplementation and workout progress. Available on Google Play.',
+    name: 'Creatine Journey',
+    href: 'https://creatinetrackersonol.netlify.app',
+    image: 'creatine.webp',
+    description: 'Mobile app for tracking creatine supplementation and workout progress.',
     tags: ['Android', 'Mobile'],
     year: '2024',
   },
   {
-    name: 'Code Duel',
-    href: 'https://play.google.com/store/apps/details?id=com.sonolDev.CodeDuel',
-    description: 'Competitive coding platform where developers challenge each other in real-time programming duels.',
-    tags: ['Android', 'Firebase'],
+    name: 'Padellers',
+    href: 'https://padellers.es',
+    image: 'padellers.webp',
+    description: 'iPhone app for tracking padel matches, following your ELO rating, and sharing results with friends.',
+    tags: ['iOS', 'Sports'],
+    year: '',
+  },
+  {
+    name: 'NFC Play!',
+    href: 'https://nfcgames-privacy-policy.vercel.app',
+    image: 'nfc-play.webp',
+    description: 'Outdoor game app using NFC card scanning to trigger location-based interactive experiences.',
+    tags: ['Android', 'NFC'],
     year: '2024',
+  },
+  {
+    name: 'Study AWS Developer Associate',
+    href: 'https://apps.apple.com/es/app/study-aws-developer-associate/id6777165133',
+    image: 'study-aws-1.jpg',
+    gallery: ['study-aws-1.jpg', 'study-aws-2.jpg', 'study-aws-3.jpg'],
+    description: 'Study app for preparing for the AWS Developer Associate certification.',
+    tags: ['iOS', 'AWS'],
+    year: '',
   },
   {
     name: 'Spritecut',
     href: 'https://spritecut.es/',
+    image: 'spritecut.webp',
     description: 'Web tool for sprite sheet generation and manipulation, for game developers and digital artists.',
     tags: ['React', 'TypeScript'],
     year: '2024',
@@ -31,6 +51,7 @@ const projects = [
   {
     name: 'Monkey Game',
     href: 'https://github.com/alfonso7199/42-Madrid-alfsanch/tree/master/so_long',
+    image: 'monkey-game.gif',
     description: '2D game built in C with the MLX library — a monkey navigating through hand-crafted tile levels.',
     tags: ['C', 'MLX'],
     year: '2023',
@@ -38,6 +59,7 @@ const projects = [
   {
     name: 'Cub3D',
     href: 'https://github.com/alfonso7199/cub3d',
+    image: 'cub3d.png',
     description: 'Raycasting 3D engine inspired by Wolfenstein 3D, written in C as part of the 42 curriculum.',
     tags: ['C', 'Raycasting'],
     year: '2023',
@@ -45,6 +67,7 @@ const projects = [
   {
     name: 'Minishell',
     href: 'https://github.com/alfonso7199/42-Madrid-alfsanch/tree/master/minishell',
+    image: 'minishell.png',
     description: 'Unix shell in C — command execution, pipes, redirections, and environment variables.',
     tags: ['C', 'Unix'],
     year: '2023',
@@ -52,15 +75,18 @@ const projects = [
   {
     name: '42 Madrid',
     href: 'https://github.com/alfonso7199/42-Madrid-alfsanch',
+    image: '42-madrid.webp',
     description: 'Full collection from the 42 curriculum — algorithms, memory management, and systems engineering.',
     tags: ['C', 'Systems'],
     year: '2022–24',
   },
   {
-    name: 'NFC Play!',
-    href: 'https://github.com/alfonso7199/nfcPlay-',
-    description: 'Outdoor game app using NFC card scanning to trigger location-based interactive experiences.',
-    tags: ['Android', 'NFC'],
+    name: 'Code Duel',
+    href: 'https://play.google.com/store/apps/details?id=com.sonolDev.CodeDuel',
+    image: 'code-duel-1.png',
+    gallery: ['code-duel-1.png', 'code-duel-2.png', 'code-duel-3.png'],
+    description: 'Competitive coding platform where developers challenge each other in real-time programming duels.',
+    tags: ['Android', 'Firebase'],
     year: '2024',
   },
 ];
@@ -122,7 +148,8 @@ const ProjectList: React.FC = () => {
           >
             <div className="h-px bg-gray-400 dark:bg-gray-700 mb-4" />
 
-            <div className="pb-4 group">
+            <div className="pb-4 group xl:grid xl:grid-cols-[minmax(0,1fr)_240px] 2xl:grid-cols-[minmax(0,1fr)_280px] xl:items-center xl:gap-8">
+              <div className="min-w-0">
               {/* Index + name + arrow */}
               <div className="flex items-baseline gap-3">
                 <span className="text-[11px] text-gray-600 dark:text-gray-400 tabular-nums shrink-0 select-none">
@@ -171,6 +198,44 @@ const ProjectList: React.FC = () => {
                             font-pp_neue_montrealmedium leading-relaxed mt-2 ml-[26px]">
                 {project.description}
               </p>
+              </div>
+
+              <a
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View ${project.name}`}
+                className="hidden xl:block overflow-hidden rounded-xl border border-black/10 dark:border-white/10
+                           bg-black/5 dark:bg-white/5 aspect-[8/5] shadow-sm
+                           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4
+                           focus-visible:outline-gray-500"
+              >
+                {project.gallery ? (
+                  <div className="grid h-full grid-cols-3 gap-1 bg-[#0c111b] p-2 transition-transform duration-500 motion-safe:group-hover:scale-[1.035]">
+                    {project.gallery.map((image, index) => (
+                      <img
+                        key={image}
+                        src={`${import.meta.env.BASE_URL}images/projects/${image}`}
+                        alt={`${project.name} — app screenshot ${index + 1}`}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full min-h-0 w-full object-contain"
+                      />
+                    ))}
+                  </div>
+                ) : (
+                <img
+                  src={`${import.meta.env.BASE_URL}images/projects/${project.image}`}
+                  alt={`Screenshot of ${project.name}`}
+                  width={800}
+                  height={500}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover object-top transition-transform duration-500
+                             motion-safe:group-hover:scale-[1.035]"
+                />
+                )}
+              </a>
             </div>
           </motion.div>
         ))}
@@ -313,12 +378,13 @@ export const Content: React.FC<ContentProps> = ({ activeSection }) => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -12 }}
         transition={{ duration: 0.22, ease: 'easeInOut' }}
-        className="fixed left-8 md:left-16 top-20 md:top-16
+        className={`fixed left-8 md:left-16 top-20 md:top-16
                    max-w-[calc(100%-4rem)] md:max-w-xs lg:max-w-lg
                    max-h-[calc(100vh-12rem)]
                    px-4 md:px-0
                    overflow-y-auto
-                   [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+                   [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]
+                   ${activeSection === 'projects' ? 'xl:w-[calc(100vw-22rem)] xl:max-w-[960px]' : ''}`}
       >
         {sections[activeSection]}
       </motion.div>
