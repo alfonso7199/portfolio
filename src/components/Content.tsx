@@ -21,7 +21,7 @@ const projects = [
     image: 'padellers.webp',
     description: 'iPhone app for tracking padel matches, following your ELO rating, and sharing results with friends.',
     tags: ['iOS', 'Sports'],
-    year: '',
+    year: '2026',
   },
   {
     name: 'NFC Play!',
@@ -38,7 +38,7 @@ const projects = [
     gallery: ['study-aws-1.jpg', 'study-aws-2.jpg', 'study-aws-3.jpg'],
     description: 'Study app for preparing for the AWS Developer Associate certification.',
     tags: ['iOS', 'AWS'],
-    year: '',
+    year: '2026',
   },
   {
     name: 'Spritecut',
