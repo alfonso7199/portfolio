@@ -13,7 +13,7 @@ const projects = [
     image: 'creatine.webp',
     description: 'Mobile app for tracking creatine supplementation and workout progress.',
     tags: ['Android', 'Mobile'],
-    year: '2024',
+    year: '2026',
   },
   {
     name: 'Padellers',
@@ -29,7 +29,7 @@ const projects = [
     image: 'nfc-play.webp',
     description: 'Outdoor game app using NFC card scanning to trigger location-based interactive experiences.',
     tags: ['Android', 'NFC'],
-    year: '2024',
+    year: '2026',
   },
   {
     name: 'Study AWS Developer Associate',
@@ -46,7 +46,7 @@ const projects = [
     image: 'spritecut.webp',
     description: 'Web tool for sprite sheet generation and manipulation, for game developers and digital artists.',
     tags: ['React', 'TypeScript'],
-    year: '2024',
+    year: '2026',
   },
   {
     name: 'Monkey Game',
@@ -54,7 +54,7 @@ const projects = [
     image: 'monkey-game.gif',
     description: '2D game built in C with the MLX library — a monkey navigating through hand-crafted tile levels.',
     tags: ['C', 'MLX'],
-    year: '2023',
+    year: '2025',
   },
   {
     name: 'Cub3D',
@@ -62,7 +62,7 @@ const projects = [
     image: 'cub3d.png',
     description: 'Raycasting 3D engine inspired by Wolfenstein 3D, written in C as part of the 42 curriculum.',
     tags: ['C', 'Raycasting'],
-    year: '2023',
+    year: '2025',
   },
   {
     name: 'Minishell',
@@ -70,7 +70,7 @@ const projects = [
     image: 'minishell.png',
     description: 'Unix shell in C — command execution, pipes, redirections, and environment variables.',
     tags: ['C', 'Unix'],
-    year: '2023',
+    year: '2025',
   },
   {
     name: '42 Madrid',
@@ -78,7 +78,7 @@ const projects = [
     image: '42-madrid.webp',
     description: 'Full collection from the 42 curriculum — algorithms, memory management, and systems engineering.',
     tags: ['C', 'Systems'],
-    year: '2022–24',
+    year: '2024–26',
   },
   {
     name: 'Code Duel',
@@ -87,7 +87,7 @@ const projects = [
     gallery: ['code-duel-1.png', 'code-duel-2.png', 'code-duel-3.png'],
     description: 'Competitive coding platform where developers challenge each other in real-time programming duels.',
     tags: ['Android', 'Firebase'],
-    year: '2024',
+    year: '2026',
   },
 ];
 
