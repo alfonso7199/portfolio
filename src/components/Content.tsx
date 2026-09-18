@@ -12,7 +12,7 @@ const projects = [
     href: 'https://creatinetrackersonol.netlify.app',
     image: 'creatine.webp',
     description: 'Mobile app for tracking creatine supplementation and workout progress.',
-    tags: ['Android', 'Mobile'],
+    tags: ['Android', 'iOS', 'Mobile'],
     year: '2026',
   },
   {
@@ -28,8 +28,8 @@ const projects = [
     href: 'https://nfcgames-privacy-policy.vercel.app',
     image: 'nfc-play.webp',
     description: 'Outdoor game app using NFC card scanning to trigger location-based interactive experiences.',
-    tags: ['Android', 'NFC'],
-    year: '2026',
+    tags: ['Android', 'iOS', 'NFC'],
+    year: '2024–2026',
   },
   {
     name: 'Study AWS Developer Associate',
@@ -87,7 +87,7 @@ const projects = [
     gallery: ['code-duel-1.png', 'code-duel-2.png', 'code-duel-3.png'],
     description: 'Competitive coding platform where developers challenge each other in real-time programming duels.',
     tags: ['Android', 'Firebase'],
-    year: '2026',
+    year: '2025',
   },
 ];
 
